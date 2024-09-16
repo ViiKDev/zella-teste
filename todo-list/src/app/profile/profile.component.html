@@ -1,0 +1,46 @@
+<div class="profile-page">
+    <div class="profile-wrapper">
+        <form (ngSubmit)="handleSubmit()" class="profile-content" [formGroup]="profileForm">
+            <h3>Profile</h3>
+            <div>
+                <div class="phone-field">
+                    <label for="phone">Phone</label>
+                    <input formControlName="phone" placeholder="0012341234" type="text"
+                        [(ngModel)]="profileForm.value.phone"
+                        [class.filled]="phoneField != '' || profileForm.controls['phone'].valid"
+                        [class.error]="profileForm.controls['phone'].dirty && profileForm.hasError('pattern', 'phone')">
+                </div>
+                <small *ngIf="profileForm.controls['phone'].dirty && profileForm.hasError('pattern', 'phone')">*Phone is
+                    not valid, use only numbers</small>
+            </div>
+            <div>
+                <div class="gender-field">
+                    <label for="gender">Gender</label>
+                    <select formControlName="gender" (change)="changeOption($event)"
+                        [class.filled]="profileForm.controls['gender'].valid"
+                        [class.error]="profileForm.controls['gender'].dirty && profileForm.hasError('gender')"
+                        [(ngModel)]="genderField">
+                        <option value="" selected disbaled hidden>- Choose -</option>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+            </div>
+            <div>
+                <div class="birthdate-field">
+                    <label for="birthDate">BirthDate</label>
+                    <input [(ngModel)]="birthDateField" (change)="changeDate($event)" type="date"
+                        formControlName="birthDate" [class.filled]="profileForm.controls['birthDate'].valid"
+                        [class.error]="invalidDate">
+                </div>
+            </div>
+            <button [disabled]="profileForm.invalid || invalidDate || profileForm.pristine || actionInProgress"
+                (click)="onSave()" class="save-button"
+                [class.disabled]="profileForm.invalid || invalidDate || profileForm.pristine || actionInProgress"><span
+                    *ngIf="!actionInProgress">
+                    Save
+                </span><i *ngIf="actionInProgress" class="loading-icon"></i></button>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,14 @@
+<header>
+    <div>
+        <app-new-todo></app-new-todo>
+    </div>
+    <div>
+        <app-todo-filter></app-todo-filter>
+    </div>
+</header>
+<div class="todo-list">
+    <app-todo-item *ngFor="let item of items" [item]="item"></app-todo-item>
+    <div class="default-item" *ngIf="items.length == 0">
+        No tasks have been added yet...
+    </div>
+</div>

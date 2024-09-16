@@ -1,0 +1,89 @@
+<div class="login-form" *ngIf="!signUpActive">
+    <div class="login-wrapper">
+        <form (ngSubmit)="handleSubmit()" class="login-content" [formGroup]="loginForm">
+            <h3>Login</h3>
+            <div>
+                <div class="email-field">
+                    <label for="email">Email</label>
+                    <input formControlName="email" type="text"
+                        [class.filled]="loginForm.controls['email'].valid || loginForm.controls['email'].dirty"
+                        [class.error]="(loginForm.controls['email'].dirty && (loginForm.hasError('required', 'email') || loginForm.hasError('email','email')) || invalidForm)">
+                </div>
+                <small *ngIf="loginForm.controls['email'].dirty && loginForm.hasError('required', 'email')">*Email
+                    is required</small>
+                <small *ngIf="loginForm.controls['email'].dirty && loginForm.hasError('email', 'email')">*Invalid
+                    format,
+                    try: example@email.com
+                </small>
+            </div>
+            <div>
+                <div class="passwordHash-field">
+                    <label for="passwordHash">Password</label>
+                    <input formControlName="passwordHash" [type]="showPassword ? 'text' : 'password'"
+                        [class.filled]="loginForm.controls['passwordHash'].valid"
+                        [class.error]="(loginForm.controls['passwordHash'].dirty && loginForm.hasError('required', 'passwordHash') || invalidForm)">
+                    <button type="button" (click)="showPasswordClick($event)" class="show-passwordHash"><i
+                            [class]="showPassword ? 'eye-icon-dash' : 'eye-icon'"></i></button>
+                </div>
+                <small
+                    *ngIf="loginForm.controls['passwordHash'].dirty && loginForm.hasError('required', 'passwordHash')">*Password
+                    is required</small>
+            </div>
+            <!-- <div class=" checkbox-field">
+                <label for="showPass">Show passwordHash: </label>
+                <input type="checkbox" [(ngModel)]="showPassword" class="checkbox">
+            </div> -->
+            <button [disabled]="loginForm.invalid || actionInProgress" (click)="onSubmitLogin()" class="login-button"
+                [class.disabled]="loginForm.invalid || actionInProgress"><span *ngIf="!actionInProgress">
+                    Login
+                </span><i *ngIf="actionInProgress" class="loading-icon"></i></button>
+            <a (click)="changeForm()">Don't have an account?</a>
+        </form>
+    </div>
+</div>
+
+<div class="login-form" *ngIf="signUpActive">
+    <div class="login-wrapper">
+        <form (ngSubmit)="handleSubmit()" class="login-content" [formGroup]="signUpForm">
+            <h3>Sign Up</h3>
+            <div>
+                <div class="email-field">
+                    <label for="email">Email</label>
+                    <input formControlName="email" type="text"
+                        [class.filled]="signUpForm.controls['email'].valid || signUpForm.controls['email'].dirty"
+                        [class.error]="(signUpForm.controls['email'].dirty && (signUpForm.hasError('required', 'email') || signUpForm.hasError('email','email')) || invalidForm)">
+                </div>
+                <small *ngIf="signUpForm.controls['email'].dirty && signUpForm.hasError('required','email')">*Email
+                    is required</small>
+                <small *ngIf="signUpForm.controls['email'].dirty && signUpForm.hasError('email', 'email')">*Invalid
+                    format,
+                    try: example@email.com
+                </small>
+            </div>
+            <div>
+                <div class="passwordHash-field">
+                    <label for="passwordHash">Password</label>
+                    <input formControlName="passwordHash" [type]="showPassword ? 'text' : 'password'"
+                        [class.filled]="signUpForm.controls['passwordHash'].valid"
+                        [class.error]="(signUpForm.controls['passwordHash'].dirty && signUpForm.hasError('required', 'passwordHash') || invalidForm)">
+                    <button type="button" (click)="showPasswordClick($event)" class="show-passwordHash"><i
+                            [class]="showPassword ? 'eye-icon-dash' : 'eye-icon'"></i></button>
+                </div>
+                <small
+                    *ngIf="signUpForm.controls['passwordHash'].dirty && signUpForm.hasError('required','passwordHash')">*Password
+                    is required</small>
+            </div>
+            <!-- <div class=" checkbox-field">
+                <label for="showPass">Show passwordHash: </label>
+                <input type="checkbox" [(ngModel)]="showPassword" class="checkbox">
+            </div> -->
+            <button [disabled]="signUpForm.invalid || actionInProgress" (click)="onSubmitSignUp()" class="login-button"
+                [class.disabled]="signUpForm.invalid || actionInProgress"><span *ngIf="!actionInProgress">
+                    Sign Up
+                </span>
+                <i *ngIf="actionInProgress" class="loading-icon"></i>
+            </button>
+            <a (click)="changeForm()">Already have an account?</a>
+        </form>
+    </div>
+</div>

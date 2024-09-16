@@ -1,0 +1,118 @@
+:root
+    --background-color: #efede0
+    --dark-background-color: #e5e2cf
+    --card-color: #f9f8f2
+    --highlight-color: #fdfdfb
+    --primary-text-color: #282828
+    --secondary-text-color: #787878
+    --tertiary-text-color: #cecece
+    --success-color: #2e8b57
+    --highlight-success-color: #43af72
+    --danger-color: #ed1c24
+    --highlight-danger-color: #ff6464
+    --accent-color: #3f3e8f
+    --highlight-accent-color: #5d5cb2
+    --options-button-color: #e9e9ed
+    --options-menu-background: #fcfcfc
+    --box-shadow: rgba(0, 0, 0, 0.2) 0px 2px 1px -1px, rgba(0, 0, 0, 0.14) 0px 1px 1px 0px, rgba(0, 0, 0, 0.12) 0px 1px 3px 0px
+    --hover-logo: #399e64
+*
+    padding: 0
+    margin: 0
+    border: 0
+
+body
+    font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif
+    letter-spacing: .05em
+    background: var(--background-color)
+    width: 100vw
+    height: 100vh
+    box-sizing: border-box
+
+i
+    &.eye-icon
+        width: 13px
+        height: 13px
+        border: 1px solid black
+        border-radius: 75% 15%
+        position: relative
+        transform: rotate(45deg)
+        display: block
+
+        &:before
+            content: ""
+            display: block
+            position: absolute
+            width: 5px
+            height: 5px
+            border: 1px solid black
+            border-radius: 50%
+            left: 3px
+            top: 3px
+
+    &.eye-icon-dash
+        width: 13px
+        height: 13px
+        border: 1px solid black
+        border-radius: 75% 15%
+        position: relative
+        transform: rotate(45deg)
+        display: block
+
+        &:before
+            content: ""
+            display: block
+            position: absolute
+            width: 5px
+            height: 5px
+            border: 1px solid black
+            border-radius: 50%
+            left: 3px
+            top: 3px
+
+        &:after
+            content: ""
+            display: block
+            position: absolute
+            width: 0
+            border-bottom: 1px solid black
+            background: white
+            padding: 1px
+            left: 50%
+            top: 50%
+            transform: translate(-50%,-50%) rotate(90deg)
+            animation-name: eye-dash
+            animation-duration: .2s
+            animation-fill-mode: forwards
+
+    &.loading-icon
+        height: 100%
+        aspect-ratio: 1
+        border-radius: 50%
+        border: 2px solid black
+        border-top-color: black !important
+        animation-name: spinner
+        animation-duration: 1.5s
+        animation-iteration-count: infinite
+
+@keyframes eye-dash
+    from
+        width: 0
+    to
+        width: 150%
+
+@keyframes up-n-down
+    0%
+        top: 0
+    25%
+        top: 1px
+    75%
+        top: -1px
+    100%
+        top: 0
+
+@keyframes spinner
+    0%
+        transform: rotate(0deg)
+    100%
+        transform: rotate(359deg)

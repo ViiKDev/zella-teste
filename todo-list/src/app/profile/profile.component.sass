@@ -1,0 +1,97 @@
+.profile-page
+    display: flex
+    flex-direction: column
+    justify-content: center
+    align-items: center
+    background: var(--dark-background-color)
+    height: 100%
+
+    .profile-wrapper
+        min-height: 300px
+        width: 300px
+        background: var(--card-color)
+        padding: 20px
+        border-radius: 20px
+        justify-content: center
+        box-shadow: var(--box-shadow)
+
+        .profile-content
+            display: flex
+            flex-direction: column
+            align-items: center
+            gap: 20px
+            box-sizing: border-box
+            padding: 0 40px
+
+            h3
+                padding: 25px 0
+                color: var(--primary-text-color)
+                text-transform: uppercase
+
+            div
+                width: 100%
+                height: 100%
+
+                .phone-field, .gender-field, .birthdate-field
+                    position: relative
+                    display: flex
+                    width: 100%
+
+                    input, select
+                        background: white
+                        border: 1px solid var(--secondary-text-color)
+                        border-radius: 5px
+                        padding: 0 8px
+                        height: 30px
+                        flex: 1
+                        z-index: 0
+
+                        &:focus-visible
+                            outline: 1px solid var(--secondary-text-color)
+
+                        &.error
+                            outline: 1px solid var(--danger-color)
+                            animation: input-shake 1s forwards
+
+                    label
+                        position: absolute
+                        margin-left: 5px
+                        box-sizing: border-box
+                        padding: 0 3px
+                        border-radius: 5px
+                        pointer-events: none
+                        transition: all .1s ease
+                        top: 50%
+                        transform: translateY(-50%)
+                        color: var(--secondary-text-color)
+                        z-index: 1
+
+                    &:has(:focus-visible), &:has(.filled)
+                        label
+                            top: 0
+                            font-size: 10px
+                            font-weight: bold
+                            background-color: white
+                            color: var(--text-color)
+            .save-button
+                width: 100%
+                height: 25px
+                display: flex
+                justify-content: center
+                align-items: center
+                padding: 5px
+                border-radius: 5px
+                background: var(--success-color)
+                color: var(--card-color)
+                font-weight: bold
+                transition: all .2s ease
+                &:hover:not(.disabled)
+                    background: var(--highlight-success-color)
+                    cursor: pointer
+                &.disabled
+                    color: var(--secondary-text-color)
+                    background: var(--tertiary-text-color)
+                .loading-icon
+                    border-color: var(--secondary-text-color)
+            small
+                color: var(--danger-color)

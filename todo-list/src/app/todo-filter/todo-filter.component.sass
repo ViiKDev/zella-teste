@@ -1,0 +1,48 @@
+.todo-filter
+    display: flex
+    justify-content: center
+    padding: 10px
+    height: 80px
+    aspect-ratio: 1
+    background: var(--dark-background-color)
+    border-radius: 10px
+    box-shadow: var(--box-shadow)
+    margin: 10px 0
+    box-sizing: border-box
+    align-items: center
+
+    .filter-content
+        width: 100%
+        height: 100%
+        background: #cbc7a7
+        border-radius: 7px
+        transition: all .2s ease
+        display: flex
+        justify-content: center
+        align-items: center
+        flex-direction: column
+        font-weight: bold
+        cursor: pointer
+        user-select: none
+        &:hover
+            background: #beb99a
+
+        .filter
+            span
+                font-weight: normal
+                font-size: 12px
+                &.complete
+                    color: var(--success-color)
+                &.incomplete
+                    color: var(--danger-color)
+
+    button
+        color: white
+        background: var(--success-color)
+        border-radius: 12px
+        transition: all .1s ease
+        font-size: 20px
+
+        &:hover
+            background: var(--highlight-success-color)
+            cursor: pointer

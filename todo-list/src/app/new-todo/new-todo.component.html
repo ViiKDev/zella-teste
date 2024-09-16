@@ -1,0 +1,8 @@
+<div class="new-todo">
+    <div class="input-bar">
+        <form (ngSubmit)="createNewTodoItem()">
+            <input type="text" name="TaskInput" placeholder="Task name" [(ngModel)]="todoItem.title">
+            <button (click)="createNewTodoItem()">+</button>
+        </form>
+    </div>
+</div>

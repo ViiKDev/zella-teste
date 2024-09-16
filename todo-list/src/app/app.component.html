@@ -1,0 +1,19 @@
+<!-- <app-todo-list></app-todo-list> -->
+<div class="screen">
+    <nav>
+        <div class="nav-wrapper">
+            <ul>
+                <li><a routerLink="/login" routerLinkActive="active" *ngIf="!isLoggedIn()">Login</a></li>
+                <li><a routerLink="/login" routerLinkActive="active" *ngIf="isLoggedIn()" (click)="logout()">Logout</a>
+                </li>
+                <li><a routerLink="/profile" routerLinkActive="active">Profile</a></li>
+            </ul>
+            <div routerLink="/home" class="logo">
+                <img src="../assets/zella-logo.png" alt="">
+            </div>
+        </div>
+    </nav>
+    <div class="router-outlet">
+        <router-outlet></router-outlet>
+    </div>
+</div>

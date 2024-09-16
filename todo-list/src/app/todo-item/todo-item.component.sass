@@ -1,0 +1,154 @@
+@mixin translate-rotate($x, $y, $deg)
+    transform: translate($x, $y) rotate($deg)
+
+.todo-item
+    box-sizing: border-box
+    padding: 20px
+    border-radius: 10px
+    border: 1px solid black
+    width: 100%
+    height: 150px
+    position: relative
+    background: var(--card-color)
+    border-top: 5px solid var(--danger-color)
+    transition: all .2s ease
+    cursor: pointer
+    margin: 0 auto
+
+    .todo-item-box
+        width: 100%
+        height: 100%
+        display: flex
+        justify-content: space-between
+        position: relative
+
+        .todo-item-info
+            display: flex
+            flex-direction: column
+            width: 60%
+            justify-content: space-between
+            pointer-events: none
+
+            div
+                display: flex
+                gap: 5px
+                flex-direction: column
+
+                h3
+                    color: var(--primary-text-color)
+                    transition: all .1s ease
+                    max-width: 300px
+                    white-space: nowrap
+                    overflow: hidden
+                    text-overflow: ellipsis
+                h5
+                    color: var(--secondary-text-color)
+                    opacity: 1
+                    transition: all .1s ease
+                    max-width: 300px
+                    white-space: nowrap
+                    overflow: hidden
+                    text-overflow: ellipsis
+
+            p
+                color: var(--secondary-text-color)
+                font-size: 12px
+
+        .todo-item-seal
+            width: 100px
+            height: 100px
+            overflow: hidden
+            position: absolute
+            right: 8%
+            // border-radius: 50%
+            top: 50%
+            @include translate-rotate($x: 0, $y: -50%, $deg: 0deg)
+
+            img
+                width: 100%
+                height: 100%
+
+        .todo-item-options
+            position: absolute
+            right: 0
+            height: 20px
+            width: 32px
+            text-align: center
+            letter-spacing: 2px
+            color: var(--secondary-text-color)
+            border-radius: 50px
+            box-shadow: rgba(0, 0, 0, 0.2) 0px 2px 1px -1px, rgba(0, 0, 0, 0.14) 0px 1px 1px 0px, rgba(0, 0, 0, 0.12) 0px 1px 3px 0px
+            background: var(--options-button-color)
+            cursor: pointer
+            z-index: 4
+
+        .options-menu
+            position: absolute
+            right: 0
+            top: 10px
+            display: flex
+            list-style: none
+            flex-direction: column
+            background-color: var(--options-menu-background)
+            // gap: 5px
+            z-index: 3
+            border-radius: 4px
+            box-shadow: rgba(0, 0, 0, 0.2) 0px 2px 1px -1px, rgba(0, 0, 0, 0.14) 0px 1px 1px 0px, rgba(0, 0, 0, 0.12) 0px 1px 3px 0px
+            min-width: 75px
+            overflow: hidden
+
+            li
+                padding: 5px
+                transition: all .2s ease
+                cursor: pointer
+                &:hover
+                    background: var(--tertiary-text-color)
+                &:not(:last-child)
+                    border-bottom: 1px solid var(--tertiary-text-color)
+    &:hover
+        scale: 1.01
+
+    &.complete
+        border-top-color: var(--success-color)
+
+        .todo-item-box
+            .todo-item-info
+                div
+                    h3
+                        color: var(--secondary-text-color)
+                        text-decoration: none
+
+        &:not(:hover)
+            .todo-item-box
+                .todo-item-info
+                    div
+                        h3
+                            text-decoration: line-through
+                        h5
+                            opacity: 0
+        &:hover
+            .todo-item-box
+                .todo-item-seal
+                    animation-name: jiggle
+                    animation-duration: 10s
+                    animation-timing-function: ease
+                    animation-iteration-count: infinite
+
+@keyframes jiggle
+    from
+        @include translate-rotate(0, -50%, 0deg)
+        scale: 1
+    2%
+        scale: 1
+    2.5%
+        @include translate-rotate(0, -50%, -4deg)
+    4%
+        scale: 1.03
+    5%
+        @include translate-rotate(0, -50%, 4deg)
+    10%
+        @include translate-rotate(0, -50%, 0deg)
+        scale: 1
+    to
+        @include translate-rotate(0, -50%, 0deg)
+        scale: 1

@@ -1,0 +1,21 @@
+<ng-container *ngIf="showModal">
+    <div class="modal">
+        <button class="close-modal" (click)="toggle()">x</button>
+
+        <input type="text" [value]="item.title" placeholder="Title" #title [disabled]="item.completedAt">
+        <textarea type="text" [value]="item.description" placeholder="Description" #description
+            [disabled]="item.completedAt">
+        </textarea>
+        <input type="date" [value]="item.estimatedAt" #date [disabled]="item.completedAt">
+        <div class="checkbox-area">
+            <label for="checkbox">Complete:</label>
+            <input class="checkbox" name="checkbox" type="checkbox" [checked]="item.completedAt ? true : false"
+                #checkbox>
+        </div>
+        <div class="buttons-area">
+            <button class="save-btn" (click)="saveItem(title, description, checkbox, date)">Save</button>
+            <button class="delete-btn" (click)="deleteItem()">Delete</button>
+        </div>
+    </div>
+    <div class="overlay" (click)="toggle()"></div>
+</ng-container>

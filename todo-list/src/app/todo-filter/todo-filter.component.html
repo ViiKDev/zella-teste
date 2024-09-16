@@ -1,0 +1,9 @@
+<div class="todo-filter">
+    <div class="filter-content" (click)="changeFilter()">
+        <span>Filter</span>
+        <div class="filter">
+            <span class="complete" *ngIf="completeIncomplete == 1">Complete</span>
+            <span class="incomplete" *ngIf="completeIncomplete == 2">Incomplete</span>
+        </div>
+    </div>
+</div>

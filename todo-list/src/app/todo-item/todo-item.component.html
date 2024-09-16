@@ -1,0 +1,27 @@
+<div class="todo-item" [class.complete]="item.completedAt" (click)="modal.toggle()">
+    <div class="todo-item-box">
+        <div class="todo-item-info">
+            <div>
+                <h3>{{item.title}}</h3>
+                <h5>{{item.description}}</h5>
+            </div>
+            <p>Created: {{utils.convertDate(item.createdAt)}} <span *ngIf="item.isComplete"> <b
+                        style="color: var(--main-text-color)">|</b><br>
+                    Completed: {{utils.convertDate(item.completedAt)}}</span>
+                <span *ngIf="!item.isComplete"><b style="color: var(--main-text-color)">|</b><br>
+                    Estimated: {{utils.convertDate(item.estimatedAt)}}</span>
+            </p>
+        </div>
+        <button class="todo-item-options" (mousedown)="mouseDownEvent($event)" (click)="clickBtn($event)">•••</button>
+        <ul class="options-menu" *ngIf="showMenu">
+            <li (click)="$event.stopPropagation();modal.toggle()">Edit</li>
+            <li *ngIf="!item.isComplete" (click)="setTodoAsFinished($event)">Finish</li>
+            <li (click)="deleteItem($event)">Delete</li>
+        </ul>
+        <div class="todo-item-seal" *ngIf="item.isComplete">
+            <img src="/assets/Completed-PNG.png" alt="Complete Seal">
+        </div>
+    </div>
+</div>
+
+<app-modal-edit-item #modal [item]="item"></app-modal-edit-item>

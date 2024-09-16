@@ -1,0 +1,37 @@
+{
+  "Version": 1,
+  "Hash": "O8sl6p6LRzx3YCHiD5fAw7LIAJL/oye9T4WWZjLk8Dk=",
+  "Source": "todo-api",
+  "BasePath": "_content/todo-api",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [
+    {
+      "Name": "todo-api/wwwroot",
+      "Source": "todo-api",
+      "ContentRoot": "/home/programmer/Desktop/Projects/Angular/ZellaProject/todo-api/wwwroot/",
+      "BasePath": "_content/todo-api",
+      "Pattern": "**"
+    }
+  ],
+  "Assets": [
+    {
+      "Identity": "/home/programmer/Desktop/Projects/Angular/ZellaProject/todo-api/wwwroot/todoItems.csv",
+      "SourceId": "todo-api",
+      "SourceType": "Discovered",
+      "ContentRoot": "/home/programmer/Desktop/Projects/Angular/ZellaProject/todo-api/wwwroot/",
+      "BasePath": "_content/todo-api",
+      "RelativePath": "todoItems.csv",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/todoItems.csv"
+    }
+  ]
+}

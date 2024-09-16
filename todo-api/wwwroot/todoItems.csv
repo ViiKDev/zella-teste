@@ -1,0 +1,4 @@
+Id,Title,Description,CreatedAt,EstimatedAt,CompletedAt,IsComplete,UserId
+1,Walk,SomeDesc,2024-12-20,2024-12-20,2024-12-20,true,1
+2,Water,Drink,2024-12-20,2024-12-20,2024-12-20,true,1
+3,ZellaProject,FinishIt,2024-12-20,2024-12-20,2024-12-20,true,1
