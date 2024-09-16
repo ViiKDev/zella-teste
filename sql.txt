@@ -1,0 +1,66 @@
+-- Create Tables
+
+CREATE TABLE Cliente (
+  cliente_id UNIQUEIDENTIFIER PRIMARY KEY,
+  nome NVARCHAR(100),
+  cpf NVARCHAR(11),
+  cliente_referencia_id UNIQUEIDENTIFIER
+);
+
+-- Maybe change the fields "logradouro", "cidade" and "estado" for a "cep" field
+-- So all the data needed can be extracted via APIs
+
+CREATE TABLE Endereco (
+  endereco_id UNIQUEIDENTIFIER PRIMARY KEY,
+  cliente_id UNIQUEIDENTIFIER,
+  tipo_endereco INT,
+  logradouro NVARCHAR(150),
+  cidade NVARCHAR(60),
+  estado NVARCHAR(2),
+  CONSTRAINT FK_Endereco_Cliente FOREIGN KEY (cliente_id) REFERENCES Cliente(cliente_id)
+);
+
+CREATE TABLE Produto (
+  produto_id UNIQUEIDENTIFIER PRIMARY KEY,
+  nome NVARCHAR(100),
+  preco DECIMAL(12,2),
+  codigo NVARCHAR(20)
+);
+
+CREATE TABLE Pedido (
+  pedido_id UNIQUEIDENTIFIER PRIMARY KEY,
+  data DATE,
+  cliente_id UNIQUEIDENTIFIER,
+  CONSTRAINT FK_Pedido_Cliente FOREIGN KEY (cliente_id) REFERENCES Cliente(cliente_id)
+);
+
+CREATE TABLE Pedido_Produto (
+  pedido_id UNIQUEIDENTIFIER,
+  produto_id UNIQUEIDENTIFIER,
+  quantidade DECIMAL(10,4),
+  preco_unitario DECIMAL(12,2),
+  CONSTRAINT FK_Pedido_Produto_Pedido FOREIGN KEY (pedido_id) REFERENCES Pedido(pedido_id),
+  CONSTRAINT FK_Pedido_Produto_Produto FOREIGN KEY (produto_id) REFERENCES Produto(produto_id)
+);
+
+CREATE TABLE Pagamento (
+  pagamento_id UNIQUEIDENTIFIER PRIMARY KEY,
+  pedido_id UNIQUEIDENTIFIER,
+  valor DECIMAL(12,2),
+  metodo_pagamento INT,
+  CONSTRAINT FK_Pagamento_Pedido FOREIGN KEY (pedido_id) REFERENCES Pedido(pedido_id)
+);
+
+-- Insert Registers
+
+INSERT INTO Cliente (cliente_id, nome, cpf, cliente_referencia_id) VALUES (NEWID(), 'João Silva', '12345678900', NULL), (NEWID(), 'Maria Souza', '00987654321', NULL);
+
+INSERT INTO Endereco (endereco_id, cliente_id, tipo_endereco, logradouro, cidade, estado) VALUES (NEWID(), (SELECT cliente_id FROM Cliente WHERE nome = 'João Silva'), 1, 'Rua A, 123', 'São Paulo', 'SP'), (NEWID(), (SELECT cliente_id FROM Cliente WHERE nome = 'Maria Souza'), 1, 'Avenida B, 456', 'Rio de Janeiro', 'RJ');
+
+INSERT INTO Produto (produto_id, nome, preco, codigo) VALUES (NEWID(), 'Camiseta', 29.99, '123ABC'), (NEWID(), 'Calça Jeans', 29.99, '456DEF');
+
+INSERT INTO Pedido (pedido_id, data, cliente_id) VALUES (NEWID(), '2023-01-15', (SELECT cliente_id FROM Cliente WHERE nome = 'João Silva')), (NEWID(), '2023-01-20', (SELECT cliente_id FROM Cliente WHERE nome = 'Maria Souza'));
+
+INSERT INTO Pedido_Produto (pedido_id, produto_id, quantidade, preco_unitario) VALUES ((SELECT pedido_id FROM Pedido WHERE cliente_id = (SELECT cliente_id FROM Cliente WHERE nome = 'João Silva')), (SELECT produto_id FROM Produto WHERE nome = 'Camiseta'), 2, 29.99), ((SELECT pedido_id FROM Pedido WHERE cliente_id = (SELECT cliente_id FROM Cliente WHERE nome = 'Maria Souza')), (SELECT produto_id FROM Produto WHERE nome = 'Calça Jeans'), 1, 49.99);
+
+INSERT INTO Pagamento (pagamento_id, pedido_id, valor, metodo_pagamento) VALUES (NEWID(), (SELECT pedido_id FROM Pedido WHERE cliente_id = (SELECT cliente_id FROM Cliente WHERE nome = 'João Silva')), 59.98, 2), (NEWID(), (SELECT pedido_id FROM Pedido WHERE cliente_id = (SELECT cliente_id FROM Cliente WHERE nome = 'Maria Souza')), 29.99, 1);
